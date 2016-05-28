@@ -5,7 +5,7 @@
 Summary:	Vector and Matrix Math Library for C++
 Summary(pl.UTF-8):	Vector and Matrix Math Library - biblioteka matematyczna wektorów i macierzy w C++
 Name:		vmmlib
-Version:	1.8.0
+Version:	1.10.0
 Release:	1
 License:	BSD
 Group:		Libraries
@@ -13,10 +13,9 @@ Group:		Libraries
 #Source0:	https://github.com/VMML/vmmlib/archive/release-%{version}/%{name}-%{version}.tar.gz
 # use Eyescale version for now
 Source0:	https://github.com/Eyescale/vmmlib/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	66fcb200c33a1bc95eb7db1de4933655
-Source1:	https://github.com/Eyescale/CMake/archive/139ce7d/Eyescale-CMake-139ce7d.tar.gz
-# Source1-md5:	4a6abcd9e0fc417528a8ca68a97e65eb
+# Source0-md5:	6d1c7c3f8db8f730367cf0a4401bd8a0
 URL:		http://vmml.github.io/vmmlib/
+BuildRequires:	Eyescale-CMake >= 2016.04
 BuildRequires:	blas-devel
 BuildRequires:	boost-devel
 BuildRequires:	cmake >= 2.8
@@ -44,9 +43,9 @@ API documentation for vmmlib library.
 Dokumentacja API biblioteki vmmlib.
 
 %prep
-%setup -q -a1
+%setup -q
 
-%{__mv} CMake-* CMake/common
+ln -s %{_datadir}/Eyescale-CMake CMake/common
 %{__rm} .gitexternals
 
 %build
@@ -66,7 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/vmmlib/{ACKNOWLEDGEMENTS,AUTHORS,LICENSE.txt,README.md}
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/vmmlib/{ACKNOWLEDGEMENTS,LICENSE.txt,README.md}
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/vmmlib/tests
 
 %clean
@@ -74,9 +73,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ACKNOWLEDGEMENTS AUTHORS CHANGES LICENSE.txt README.md doc/RELNOTES.md
+%doc ACKNOWLEDGEMENTS LICENSE.txt README.md doc/Changelog.md
 %{_includedir}/vmmlib
-%{_pkgconfigdir}/vmmlib.pc
 %dir %{_datadir}/vmmlib
 %{_datadir}/vmmlib/CMake
 
