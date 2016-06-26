@@ -1,12 +1,12 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
-#
+
 Summary:	Vector and Matrix Math Library for C++
 Summary(pl.UTF-8):	Vector and Matrix Math Library - biblioteka matematyczna wektorów i macierzy w C++
 Name:		vmmlib
 Version:	1.10.0
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries
 # latest is 1.6.2 here
@@ -35,6 +35,9 @@ Biblioteka matematyczna wektorów i macierzy oparta na szablonach C++.
 Summary:	vmmlib API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki vmmlib
 Group:		Documentation
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 API documentation for vmmlib library.
