@@ -5,22 +5,18 @@
 Summary:	Vector and Matrix Math Library for C++
 Summary(pl.UTF-8):	Vector and Matrix Math Library - biblioteka matematyczna wektorów i macierzy w C++
 Name:		vmmlib
-Version:	1.10.0
-Release:	2
+Version:	1.14.0
+Release:	1
 License:	BSD
 Group:		Libraries
-# latest is 1.6.2 here
-#Source0:	https://github.com/VMML/vmmlib/archive/release-%{version}/%{name}-%{version}.tar.gz
-# use Eyescale version for now
+#Source0Download: https://github.com/Eyescale/vmmlib/releases
 Source0:	https://github.com/Eyescale/vmmlib/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	6d1c7c3f8db8f730367cf0a4401bd8a0
+# Source0-md5:	f25e57bfc1e4699447963f5dbafd22f2
 URL:		http://vmml.github.io/vmmlib/
-BuildRequires:	Eyescale-CMake >= 2016.04
-BuildRequires:	blas-devel
+BuildRequires:	Eyescale-CMake >= 2018.02
 BuildRequires:	boost-devel
-BuildRequires:	cmake >= 2.8
+BuildRequires:	cmake >= 3.1
 %{?with_apidocs:BuildRequires:	doxygen}
-BuildRequires:	lapack-devel
 BuildRequires:	libstdc++-devel
 Requires:	boost-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -48,14 +44,13 @@ Dokumentacja API biblioteki vmmlib.
 %prep
 %setup -q
 
+rmdir CMake/common
 ln -s %{_datadir}/Eyescale-CMake CMake/common
-%{__rm} .gitexternals
 
 %build
 install -d build
 cd build
-%cmake .. \
-	-DBUILDYARD_DISABLED=ON
+%cmake ..
 %{__make}
 
 %if %{with apidocs}
