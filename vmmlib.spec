@@ -31,9 +31,7 @@ Biblioteka matematyczna wektorów i macierzy oparta na szablonach C++.
 Summary:	vmmlib API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki vmmlib
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 API documentation for vmmlib library.
